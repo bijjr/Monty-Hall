@@ -11,46 +11,59 @@ import statistics
 
 def print_stats(win,loss):
 	
-	win_percentage = "%.2f" % (float(win / 1000))
-	lose_percentage = "%.2f" % (float(loss / 1000))
+	win_perc = "%.2f" % (float(win / 1000))
+	loss_perc = "%.2f" % (float(loss / 1000))
 
-	print("You won {} percent of the time".format(win_percentage))
-	print("and lost {} percent of the time".format(lose_percentage))
+	print("Wins: {} \n{} percent of the time".format(win,win_perc))
+	print("Losses: {} \n{} percent of the time".format(loss,loss_perc))
 
+def switch_door(rd, sd):
+	sd = 6 - rd - sd
+	return sd
+
+def remove_door(doors, pd, sd):
+	pick = random.choice(doors)
+	while pick == pd or pick == sd:
+		pick = random.choice(doors)
+	remove_door = pick
+	return remove_door
 
 def game():	
-
 	win,loss = 0, 0
 	for i in range(1000):
 		doors = [1,2,3]
-		prize_door = random.choice(doors)
-		select_door = random.choice(doors)
-		p = random.choice(doors)
-		while p == prize_door or p == select_door:
-			p = random.choice(doors)
-		remove_door = p
-		#switch_door
-		# select_door = 6 - remove_door - select_door
-		
-		print(prize_door)
-		print(select_door)
-		print(remove_door)
-	
-		if select_door == prize_door:
+		pd = random.choice(doors)
+		print("prized door {}".format(pd))
+		sd = random.choice(doors)
+		print("selected door {}".format(sd))
+		rd = remove_door(doors,pd,sd)
+		print("removeddoor {}".format(rd))
+		# sd = switch_door(rd, sd)
+		# print("switched to door {}".format(sd))
+		print("=========")
+		if sd == pd:
 			win += 1
 		else:
 			loss += 1
-
-	print("you loss {} times".format(win))
-	print("you loss {} times".format(loss))
-
 	print_stats(win,loss)
 
+	# switch_door(remove_door, select_door)
+	
+
 def main():
+
 	game()
+
 	# run_again()
 
 
 if __name__ == '__main__':
 	main()
 
+#///////////////////////////////////////////////////////////////////////////
+
+
+# class Game():
+# 	def __init__():
+# 		self.
+# 		self.
